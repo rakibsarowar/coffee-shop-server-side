@@ -33,6 +33,13 @@ async function run() {
     // Step 02 ------------------
     const coffeeCollection = client.db('coffeeDB').collection('coffee');
 
+    // Step 03------Read Data ---------
+    app.get('/coffee', async(req, res)=>{
+      const cursor = coffeeCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
     // Step 01 ----------------------
     app.post('/coffee', async(req, res) =>{
 
