@@ -40,7 +40,7 @@ async function run() {
       res.send(result);
     })
 
-    // Step 01 ----------------------
+    // Step 01: Create ----------------------
     app.post('/coffee', async(req, res) =>{
 
       const newCoffee = req.body;
@@ -50,6 +50,14 @@ async function run() {
       const result = await coffeeCollection.insertOne(newCoffee);
       res.send(result)
     })
+
+    // Step -4: Update ----------------------------------------
+      app.get('/coffee/:id', async(req, res) =>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        const result = await coffeeCollection.findOne(query);
+        res.send(result)
+      })
 
     // Step 3 - delete the data -----------------------------
     app.delete('/coffee/:id', async (req, res) =>{
